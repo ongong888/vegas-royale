@@ -271,15 +271,13 @@ button{
   </div>
   
   <!-- YouTube 嵌入式播放器 - 使用可播放的八方来财视频 -->
-  <div class="youtube-embed">
-    <iframe 
-      src="https://www.youtube.com/embed/4b_8BEaRxXo?autoplay=1&loop=1&playlist=4b_8BEaRxXo&mute=1&rel=0&modestbranding=1"
-      title="八方来财 - 揽佬SKAI ISYOURGOD"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen>
-    </iframe>
-  </div>
+  <!-- 🎵 MP3 Music Player -->
+<div class="mp3-player">
+  <audio id="bgMusic" controls autoplay loop>
+    <source src="Disco.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</div>
   
   <!-- 歌曲信息 -->
   <div class="now-playing">
@@ -483,6 +481,14 @@ setTimeout(() => {
     time: Date.now()
   });
 }, 1000);
+</script>
+<script>
+document.addEventListener("click", () => {
+  const music = document.getElementById("bgMusic");
+  if (music && music.paused) {
+    music.play().catch(()=>{});
+  }
+}, { once: true });
 </script>
 <!-- YouTube播放器已修复 - 使用有效视频ID: 4b_8BEaRxXo (八方来财) -->
 </body>
