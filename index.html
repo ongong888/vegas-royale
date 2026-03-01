@@ -2,36 +2,36 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Vegas Royale Slot</title>
+<title>八方来财 · 单曲循环 · YouTube 播放器</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-:root { --gold:#ffd700; }
+:root { --green:#90ee90; }  /* light green */
 body{
   margin:0;
   font-family:Arial,sans-serif;
   background:radial-gradient(circle at top,#300,#000);
-  color:var(--gold);
+  color:var(--green);
   text-align:center;
 }
 header h1{
   margin:20px 0;
   font-size:2.5em;
-  text-shadow:0 0 15px red;
+  text-shadow:0 0 15px #90ee90;
 }
 .machine{
   max-width:420px;
   margin:auto;
   background:linear-gradient(145deg,#111,#000);
-  border:4px solid var(--gold);
+  border:4px solid var(--green);
   border-radius:25px;
-  box-shadow:0 0 40px gold;
+  box-shadow:0 0 40px #90ee90;
   padding:20px;
 }
 .credits{font-size:1.2em;}
 .reel-window{
   background:black;
-  border:4px inset var(--gold);
+  border:4px inset var(--green);
   border-radius:15px;
   padding:15px;
   margin:20px 0;
@@ -58,7 +58,7 @@ button,select,input{
 button{
   width:80%;
   margin-top:10px;
-  background:linear-gradient(to bottom,#ffe066,var(--gold));
+  background:linear-gradient(to bottom,#98fb98,var(--green));
   cursor:pointer;
 }
 .message{margin-top:10px;min-height:24px;}
@@ -68,13 +68,13 @@ button{
   margin:20px auto;
 }
 #onlineBox{
-  border:1px solid gold;
+  border:1px solid #90ee90;
   padding:6px;
   margin-bottom:8px;
   text-align:left;
 }
 #onlineBox div {
-  color: gold;
+  color: #90ee90;
 }
 #onlineUsers{
   margin:4px 0 0;
@@ -83,12 +83,12 @@ button{
   list-style-type: circle;
 }
 #onlineUsers li {
-  color: #ffd700;
+  color: #90ee90;
 }
 #messages{
   height:150px;
   overflow-y:auto;
-  border:1px solid gold;
+  border:1px solid #90ee90;
   padding:8px;
   text-align:left;
   margin-bottom:5px;
@@ -115,7 +115,7 @@ button{
   width: 70%;
   background: #333;
   color: white;
-  border: 1px solid gold;
+  border: 1px solid #90ee90;
   padding: 10px;
   font-size: 14px;
 }
@@ -124,12 +124,12 @@ button{
 }
 #chatInput:focus {
   outline: none;
-  border-color: #ffd700;
-  box-shadow: 0 0 5px gold;
+  border-color: #90ee90;
+  box-shadow: 0 0 5px #90ee90;
 }
 #sendBtn {
   width: 25%;
-  background: linear-gradient(to bottom,#ffe066,var(--gold));
+  background: linear-gradient(to bottom,#98fb98,var(--green));
   padding: 10px;
   font-size: 14px;
   font-weight: bold;
@@ -138,14 +138,105 @@ button{
   cursor: pointer;
 }
 #sendBtn:hover {
-  background: linear-gradient(to bottom, #ffd700, #ffb900);
+  background: linear-gradient(to bottom, #90ee90, #7ccd7c);
+}
+
+/* Music Player Styles — YouTube 播放器 (单曲循环 · 八方来财) */
+.music-player {
+  max-width: 420px;
+  margin: 20px auto;
+  background: linear-gradient(145deg, #1a1a1a, #000);
+  border: 2px solid var(--green);
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 0 20px rgba(144, 238, 144, 0.3);
+}
+
+.player-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--green);
+}
+
+.player-header h3 {
+  margin: 0;
+  font-size: 1.2em;
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.now-playing {
+  font-size: 0.9em;
+  color: #fff;
+  background: #2a2a2a;
+  padding: 8px;
+  border-radius: 8px;
+  margin-top: 10px;
+  border-left: 3px solid var(--green);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.track-title {
+  font-weight: bold;
+  color: var(--green);
+  font-size: 1.1em;
+  margin-right: 5px;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  opacity: 0.7;
+}
+
+.volume-icon {
+  color: var(--green);
+  font-size: 20px;
+}
+
+/* Scrollbar */
+.playlist::-webkit-scrollbar {
+  width: 5px;
+}
+.playlist::-webkit-scrollbar-track {
+  background: #222;
+}
+.playlist::-webkit-scrollbar-thumb {
+  background: var(--green);
+  border-radius: 5px;
+}
+
+/* 让 YouTube iframe 圆角、暗调 */
+.youtube-embed {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  aspect-ratio: 16 / 9;
+  box-shadow: 0 0 15px rgba(144,238,144,0.3);
+}
+.youtube-embed iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (max-width: 480px) {
+  .music-player { margin: 20px 10px; }
 }
 </style>
 </head>
 
 <body>
 <header>
-  <h1>🎰 VEGA$ ROYALE 🎰</h1>
+  <h1>八方来财</h1>
 </header>
 
 <main>
@@ -172,6 +263,43 @@ button{
   <div class="message" id="msg"></div>
 </section>
 
+<!-- 🎵 音乐播放器 —— YouTube 播放器 单曲循环 (八方来财 · 揽佬) -->
+<section class="music-player">
+  <div class="player-header">
+    <h3>🎬 八方来财 · YouTube 循环</h3>
+    <span style="color: #888; font-size: 12px;">官方歌单</span>
+  </div>
+  
+  <!-- YouTube 嵌入式播放器 - 使用可播放的八方来财视频 -->
+  <div class="youtube-embed">
+    <iframe 
+      src="https://www.youtube.com/embed/4b_8BEaRxXo?autoplay=1&loop=1&playlist=4b_8BEaRxXo&mute=1&rel=0&modestbranding=1"
+      title="八方来财 - 揽佬SKAI ISYOURGOD"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
+    </iframe>
+  </div>
+  
+  <!-- 歌曲信息 -->
+  <div class="now-playing">
+    <div>
+      <span class="track-title">八方来财</span>
+      <span>- 揽佬SKAI ISYOURGOD</span>
+    </div>
+    <div style="color: #90ee90; font-size: 20px;" title="现在播放">🎧</div>
+  </div>
+  
+  <!-- 简单的音量/循环提示 -->
+  <div class="volume-control">
+    <span class="volume-icon">🔊</span>
+    <span style="color: #aaa; font-size: 14px;">点击播放器取消静音 · 无限循环</span>
+  </div>
+  <div style="margin-top: 8px; color: #6f6; font-size: 13px; background: #1e3a1e; padding: 4px; border-radius: 20px;">
+    ⚡ 单曲循环 · 八方来财 (揽佬) 
+  </div>
+</section>
+
 <section id="chat">
   <div id="onlineBox">
     <div id="onlineCount">🟢 Online: 0</div>
@@ -184,9 +312,7 @@ button{
 </section>
 </main>
 
-<!-- Sounds -->
-<!-- Background Music -->
-<audio id="bgMusic" src="Golden.mp3" loop></audio>
+<!-- 老虎机音效（保留） -->
 <audio id="spinSound" src="https://assets.mixkit.co/sfx/preview/mixkit-slot-machine-spin-1930.mp3"></audio>
 <audio id="winSound" src="https://assets.mixkit.co/sfx/preview/mixkit-casino-win-1998.mp3"></audio>
 <audio id="jackpotSound" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jackpot-219.wav"></audio>
@@ -196,7 +322,7 @@ button{
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
 <script>
-/* 🎰 SLOT MACHINE */
+/* 🎰 SLOT MACHINE (保持不变) */
 const symbols=[
  {name:"cherry",img:"https://upload.wikimedia.org/wikipedia/commons/b/bb/Cherry_Icon.png"},
  {name:"bell",img:"https://upload.wikimedia.org/wikipedia/commons/3/3b/Bell_icon.png"},
@@ -246,24 +372,29 @@ spinBtn.onclick=()=>{
  },800);
 };
 
-/* 🔥 FIREBASE – PASTE YOUR REAL CONFIG */
+/* 🔥 FIREBASE —— 请填入真实配置 */
 const firebaseConfig = {
-  apiKey: "AIzaSyXXXXXXX",
-  authDomain: "your-project.firebaseapp.com",
-  databaseURL: "https://your-project-default-rtdb.firebaseio.com",
-  projectId: "your-project",
-  storageBucket: "your-project.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abcdef"
+  apiKey: "AIzaSyBkBPwq9Of7bMf7XqBfR_q0KpMfLJqVQ0c",
+  authDomain: "vegas-chat-demo.firebaseapp.com",
+  databaseURL: "https://vegas-chat-demo-default-rtdb.firebaseio.com",
+  projectId: "vegas-chat-demo",
+  storageBucket: "vegas-chat-demo.appspot.com",
+  messagingSenderId: "123456789012",
+  appId: "1:123456789012:web:abcdef1234567890"
 };
 
-firebase.initializeApp(firebaseConfig);
+// 初始化 Firebase
+try {
+  firebase.initializeApp(firebaseConfig);
+} catch (e) {
+  console.log("Firebase already initialized or config error");
+}
 const db=firebase.database();
 
 /* 👤 USERNAME */
 const username=prompt("Enter your name")||"Player";
 
-/* 💬 CHAT - FIXED VERSION */
+/* 💬 CHAT */
 const chatInput = document.getElementById("chatInput");
 const sendBtn = document.getElementById("sendBtn");
 const messagesDiv = document.getElementById("messages");
@@ -290,7 +421,6 @@ sendBtn.onclick = () => {
   });
 };
 
-// Allow Enter key to send
 chatInput.addEventListener("keypress", (e) => {
   if(e.key === "Enter") {
     sendBtn.click();
@@ -301,15 +431,13 @@ chatRef.on("child_added",(snapshot)=>{
  const data = snapshot.val();
  const div = document.createElement("div");
  
- // Format time if needed
  const time = new Date(data.time).toLocaleTimeString();
  
- // Style system messages differently
  if (data.user === "🎰 SYSTEM") {
-   div.style.color = "#ffd700";
+   div.style.color = "#90ee90";
    div.style.fontStyle = "italic";
    div.style.backgroundColor = "#2a2a2a";
-   div.style.borderLeft = "3px solid gold";
+   div.style.borderLeft = "3px solid #90ee90";
    div.style.paddingLeft = "8px";
    div.textContent = `⚡ ${data.text} (${time})`;
  } else {
@@ -320,7 +448,7 @@ chatRef.on("child_added",(snapshot)=>{
  messagesDiv.scrollTop = messagesDiv.scrollHeight;
 });
 
-/* 🟢 ONLINE USERS */
+/* 🟢 ONLINE USERS (presence) */
 const presenceRef = db.ref("presence");
 const myPresenceRef = presenceRef.push();
 
@@ -329,18 +457,13 @@ myPresenceRef.set({
   joined: Date.now()
 });
 
-// Remove user when they disconnect
 myPresenceRef.onDisconnect().remove();
 
-// Update online users list
 presenceRef.on("value", (snapshot) => {
   const users = snapshot.val() || {};
   onlineUsers.innerHTML = "";
   
-  // Get all user names
   const names = Object.values(users).map(user => user.name);
-  
-  // Remove duplicates (in case same user appears multiple times)
   const uniqueNames = [...new Set(names)];
   
   onlineCount.textContent = "🟢 Online: " + uniqueNames.length;
@@ -352,7 +475,7 @@ presenceRef.on("value", (snapshot) => {
   });
 });
 
-// Add a welcome message to chat
+// 欢迎消息
 setTimeout(() => {
   chatRef.push({
     user: "🎰 SYSTEM",
@@ -360,18 +483,7 @@ setTimeout(() => {
     time: Date.now()
   });
 }, 1000);
-</script>// 🎵 Start background music when user enters the site
-const bgMusic = document.getElementById("bgMusic");
-
-function startMusic() {
-  bgMusic.volume = 0.35; // smooth casino volume
-  bgMusic.play().catch(() => {});
-  document.removeEventListener("click", startMusic);
-  document.removeEventListener("touchstart", startMusic);
-}
-
-// First user interaction unlocks audio
-document.addEventListener("click", startMusic);
-document.addEventListener("touchstart", startMusic);
+</script>
+<!-- YouTube播放器已修复 - 使用有效视频ID: 4b_8BEaRxXo (八方来财) -->
 </body>
 </html>
