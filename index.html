@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Vegas Royale Slot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --gold: #ffd700;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #300, #000);
+      color: var(--gold);
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 20px 0;
+      font-size: 2.5em;
+      text-shadow: 0 0 15px red;
+    }
+
+    .machine {
+      max-width: 420px;
+      margin: auto;
+      background: linear-gradient(145deg, #111, #000);
+      border: 4px solid var(--gold);
+      border-radius: 25px;
+      box-shadow: 0 0 40px gold;
+      padding: 20px;
+    }
+
+    .credits {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+
+    .reel-window {
+      background: black;
+      border: 4px inset var(--gold);
+      border-radius: 15px;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    .slots {
+      display: flex;
+      justify-content: center;
+    }
+
+    .slot {
+      background: #fff;
+      width: 90px;
+      height: 90px;
+      margin: 0 6px;
+      border-radius: 12px;
+      box-shadow: inset 0 0 10px #000;
+    }
+
+    .slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    select,
+    button {
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 10px;
+      border: none;
+    }
+
+    button {
+      width: 80%;
+      margin-top: 10px;
+      background: linear-gradient(to bottom, #ffe066, var(--gold));
+      cursor: pointer;
+      box-shadow: 0 0 25px gold;
+    }
+
+    button:hover {
+      box-shadow: 0 0 40px gold;
+    }
+
+    .message {
+      margin-top: 15px;
+      min-height: 28px;
+      font-size: 1.1em;
+    }
+
+    #chat {
+      max-width: 420px;
+      margin: 20px auto;
+    }
+
+    #messages {
+      height: 150px;
+      overflow-y: auto;
+      border: 1px solid var(--gold);
+      padding: 6px;
+      margin-bottom: 5px;
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>🎰 VEGA$ ROYALE 🎰</h1>
+  </header>
+
+  <main>
+    <section class="machine">
+      <div class="credits">
+        Credits: $<span id="credits">100</span>
+      </div>
+
+      <div class="reel-window">
+        <div class="slots">
+          <div class="slot"><img id="r1" alt=""></div>
+          <div class="slot"><img id="r2" alt=""></div>
+          <div class="slot"><img id="r3" alt=""></div>
+        </div>
+      </div>
+
+      <label for="bet">Bet:</label>
+      <select id="bet">
+        <option value="5">$5</option>
+        <option value="10" selected>$10</option>
+        <option value="20">$20</option>
+        <option value="50">$50</option>
+      </select>
+
+      <br />
+      <button id="spinBtn">SPIN</button>
+
+      <div class="message" id="msg"></div>
+    </section>
+
+    <section id="chat">
+      <div id="messages"></div>
+      <input id="chatInput" placeholder="Type message..." />
+      <button id="sendBtn">Send</button>
+    </section>
+  </main>
+
+  <!-- 🔊 SOUNDS -->
+  <audio id="spinSound" src="https://assets.mixkit.co/sfx/preview/mixkit-slot-machine-spin-1930.mp3"></audio>
+  <audio id="winSound" src="https://assets.mixkit.co/sfx/preview/mixkit-casino-win-1998.mp3"></audio>
+  <audio id="jackpotSound" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jackpot-219.wav"></audio>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <script>
+    const symbols = [
+      { name: "cherry", img: "https://upload.wikimedia.org/wikipedia/commons/b/bb/Cherry_Icon.png" },
+      { name: "bell", img: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Bell_icon.png" },
+      { name: "diamond", img: "https://upload.wikimedia.org/wikipedia/commons/5/5f/Diamond_icon.png" },
+      { name: "star", img: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Star_icon.png" }
+    ];
+
+    let credits = 100;
+
+    const r1 = document.getElementById("r1");
+    const r2 = document.getElementById("r2");
+    const r3 = document.getElementById("r3");
+    const creditsSpan = document.getElementById("credits");
+    const betSelect = document.getElementById("bet");
+    const msg = document.getElementById("msg");
+
+    const spinSound = document.getElementById("spinSound");
+    const winSound = document.getElementById("winSound");
+    const jackpotSound = document.getElementById("jackpotSound");
+
+    function randSymbol() {
+      return symbols[Math.floor(Math.random() * symbols.length)];
+    }
+
+    function updateCredits() {
+      creditsSpan.textContent = credits;
+    }
+
+    function spin() {
+      const bet = Number(betSelect.value);
+      if (credits < bet) {
+        msg.textContent = "❌ Not enough credits";
+        return;
+      }
+
+      credits -= bet;
+      updateCredits();
+      spinSound.currentTime = 0;
+      spinSound.play();
+
+      setTimeout(() => {
+        const a = randSymbol();
+        const b = randSymbol();
+        const c = randSymbol();
+
+        r1.src = a.img;
+        r2.src = b.img;
+        r3.src = c.img;
+
+        spinSound.pause();
+
+        if (a.name === b.name && b.name === c.name) {
+          const win = bet * 6;
+          credits += win;
+          jackpotSound.play();
+          msg.textContent = `🎉 JACKPOT! +$${win}`;
+        } else if (a.name === b.name || b.name === c.name || a.name === c.name) {
+          const win = bet * 2;
+          credits += win;
+          winSound.play();
+          msg.textContent = `✨ WIN! +$${win}`;
+        } else {
+          msg.textContent = "😢 No win";
+        }
+
+        updateCredits();
+      }, 900);
+    }
+
+    document.getElementById("spinBtn").addEventListener("click", spin);
+
+    // 🔥 Firebase Chat
+    const firebaseConfig = {
+      apiKey: "YOUR_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      databaseURL: "https://YOUR_PROJECT.firebaseio.com",
+      projectId: "YOUR_PROJECT"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const chatRef = db.ref("rooms/vegas-room");
+
+    document.getElementById("sendBtn").addEventListener("click", () => {
+      const input = document.getElementById("chatInput");
+      if (!input.value.trim()) return;
+
+      chatRef.push({
+        user: "Player",
+        text: input.value,
+        time: Date.now()
+      });
+      input.value = "";
+    });
+
+    chatRef.on("child_added", snap => {
+      const data = snap.val();
+      const div = document.createElement("div");
+      div.textContent = `${data.user}: ${data.text}`;
+      document.getElementById("messages").appendChild(div);
+    });
+  </script>
+</body>
+</html>
